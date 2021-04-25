@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        //1. Promises/Asynchronous and callbacks
+        //• Create a function that returns a value after 1 second (return inside a setTimeout).
+        /*function getValue() {
+            let value = 0;
+            setTimeout(function () {
+                value = 10;
+                console.log(value);
+
+            }, 1000);
+            return value;
+        }
+        console.log(getValue());*/
+        
+
+        //• Pass a callback (function) to the function created in the previous step and execute that function inside the timeout by passing the value.
+        /*function getValue(callback) {
+            let value = 0;
+            setTimeout(function () {
+                value = 10;
+                callback(value);
+
+            }, 2000);
+            return value;
+        }
+        console.log(getValue(function (nValue) {
+            console.log("Callback function " + nValue);
+        }));*/
+
+        //• Now return a promise instead of accepting the callback.
+        /*function getValue() {
+            let value = 0;
+
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    value = 10;
+                    resolve(value);
+                }, 3000);
+            });
+
+        }
+        getValue().then(function (value) {
+            console.log(value);
+        });
+        console.log("Hello");*/
+/*
+        function getValue(callback) {
+            let value = 0;
+            setTimeout(function () {
+                value = 10;
+                //This is the anonymous function defined in line no 74
+                callback(value);
+            }, 1000);
+        }
+        function getNewValue(value, callback) {
+            setTimeout(function () {
+                //This is the anonymous function defined in line no 76
+                callback(value * 100);
+            }, 1000);
+
+        }
+        //call the function defined at line no 58
+        getValue(function (value) {
+            //call the function defined at line no 66
+            getNewValue(value, function (newValue) {
+                console.log(newValue);
+            });
+        });
+*/
+        //• Let’s try to chain these promises.
+/*        let promise = new Promise(function (resolve, reject) {
+            resolve();
+            reject();
+        });
+*/
+/*
+        function getValue() {
+            let value = 0;
+            //resolve is for success
+            //reject is for error
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    value = 10;
+                    resolve(value);
+                }, 1000);
+            })
+        }
+
+        function getNewValue(value) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve(value * 100);
+                }, 1000);
+            })
+        }
+
+//        function setValue(value) {
+//            return value + 1999;
+//        }
+
+        getValue().then(function (value) {
+            //console.log(value);
+            return getNewValue(value);
+//        }).then(function (value) {
+//            return setValue(value);
+        }).then(function (value) {
+            console.log(value);
+        });
+*/
+
+        //2. Classes in JavaScript
+        //• Create a class named Vehicle using a function.
+        //• Add a property named type to the class (this.type). Assign a value to that variable using a constructor argument.
+        //• Add a function to its prototype named drive (Vehicle.prototype.print...). Print ‘Vehicle is driving’ in the function body.
+        //• Add VehicleCount (Vehicle.VehicleCount) as a static variable.
+        //• Increase the number of VehicleCount (Vehicle.VehicleCount++) by one inside the constructor.
+        //• Create an object from Vehicle class (new Vehicle) and check static variable value, type property value and function work.
+        //• Create a class named Car and extend the class Vehicle (Car.prototype = Object.create(Vehicle.prototype); Car.prototype.constructor = Car).
+        //• Add a new method called balanceWheels to Car and print ‘Wheels are balanced’ in the function body.
+        //• Call balanceWheels and drive methods using a car object and verify the functionality.
+        //• Check the static variable value and type variable value. Notice that they are not correct.
+        //• The reason for the above behavior is that we didn’t call the parent constructor from the child class. Do this by using the call method (in Car constructor function Vehicle.call(this, type);)
+        //• Re-validate the values.
+
+/*
+        function Vehicle(type) {
+            this.type = type;
+            Vehicle.VehicleCount++;
+            /!*this.example = function () {
+                console.log("example");
+            }*!/
+
+        }
+
+        Vehicle.prototype.print = function () {
+            console.log(this.type + " Vehicle is driving");
+        }
+        Vehicle.VehicleCount = 0;
+
+        const vehicle = new Vehicle("Suzuki");
+        //console.log(Vehicle.VehicleCount);
+        vehicle.print();
+
+        function Car(type) {
+            Vehicle.call(this,type);
+
+        }
+        Car.prototype = Object.create(Vehicle.prototype);
+        Car.prototype.constructor = Car;
+
+        Car.prototype.balanceWheels = function () {
+            console.log("Wheels are balanced");
+        }
+
+        const  car = new Car("Toyota");
+
+        car.print();
+        car.balanceWheels();
+        //vehicle.balanceWheels();
+        console.log(car.type, Vehicle.VehicleCount);
+
+        //console.log(vehicle);
+        //console.log(car);
+
+        */
+        //3. Use arrow functions.
+        /*
+        let displayName =  function (name) {
+            console.log("Hello " + name);
+        };
+        displayName("SLIIT");
+
+        let printName = (name) =>{
+            console.log("Hello " + name + " function");
+        }
+
+        printName("Arrow");
+*/
+        /*
+        window.name = "John";
+
+        let person = {
+            name: "Jane",
+            age: 22,
+            printName() {
+                console.log("Regular function: " + this.name);
+            },
+            displayName:()=>{
+                console .log("Arrow function: " + this.name);
+            }
+        };
+
+        person.printName();
+        person.displayName();
+*/
+/*        function getValue() {
+            let value = 0;
+            //resolve is for success
+            //reject is for error
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    value = 10;
+                    resolve(value);
+                }, 1000);
+            });
+        }
+
+        function getNewValue(value) {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve(value * 100);
+                }, 1000);
+            });
+        }
+
+        function setValue(value) {
+            return value = 1999;
+        }
+
+        async function print() {
+            let value = await getValue();
+            value = await getNewValue(value);
+            //value = setValue(value);
+            //console.log(value);
+            return value;
+        }
+
+        print().then(value => console.log(value));
+*/
+
+        //4. Try exercise 1 with async/await.
+       /* function getValue() {
+            let value = 0;
+
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    value = 10;
+                    resolve(value);
+                }, 2000);
+            });
+
+        }
+        getValue().then(function (value) {
+            console.log(value);
+        });
+
+        //console.log("Hello");
+
+        async function print() {
+            let value = await getValue();
+            console.log(value);
+            console.log("Some text");
+        }
+
+        print();
+*/
+/*        function getValue() {
+            let value = 0;
+            //resolve is for success
+            //reject is for error
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    value = 10;
+                    resolve(value);
+                }, 1000);
+            })
+        }
+
+        function getNewValue(value) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve(value * 100);
+                }, 1000);
+            })
+        }
+
+        function setValue(value) {
+            return value = 1999;
+        }
+
+        async function print() {
+            let value = await getValue();
+            value = await getNewValue(value);
+            //value = setValue(value);
+            console.log(value);
+            //return value;
+        }
+
+        print();
+        //print().then(function (value) {
+        //    console.log(value);
+        //});
+*/
+
+        //5. Try exercise 2 class, extends, get, set, and super keywords.
+        /*function Vehicle(type) {
+            this.type = type;
+            Vehicle.VehicleCount++;
+        }
+
+        Vehicle.prototype.drive = function () {
+            console.log(this.type + " Vehicle is driving");
+        }
+
+        Vehicle.VehicleCount = 0;
+        const vehicle = new Vehicle("Suzuki");
+        vehicle.drive();
+        console.log(Vehicle.VehicleCount);
+
+        function Car(type) {
+            Vehicle.call(this,type);
+
+        }
+        Car.prototype = Object.create(Vehicle.prototype);
+        Car.prototype.constructor = Car;
+
+        Car.prototype.balanceWheels = function () {
+            console.log("Wheels are balanced");
+        };
+
+        const  car = new Car("Toyota");
+        car.balanceWheels();
+        car.drive();
+        console.log(Vehicle.VehicleCount);
+*/
+
+      /*  class Vehicle{
+            static VehicleCount = 0;
+            constructor(type) {
+                this.type = type;
+                Vehicle.VehicleCount++;
+            }
+
+            drive() {
+                console.log(this.type + " is driving");
+            }
+        }
+
+        let vehicle = new Vehicle("Toyota");
+        vehicle.drive();
+        console.log(Vehicle.VehicleCount);
+
+        class Car extends Vehicle{
+            constructor(type) {
+                super(type);
+            }
+            wheelBalance(){
+                console.log("Wheels are balanced in " + this.type);
+            }
+        }
+
+        let car = new Car("Nissan");
+        car.drive();
+        car.wheelBalance();
+        console.log(Vehicle.VehicleCount);
+*/
+/*
+        class Square {
+            constructor(width) {
+                this.width = width;
+                this.height = width;
+            }
+
+            get area() {
+                return this.height * this.width;
+            }
+            set area(area) {
+                this.width = Math.sqrt(area);
+                this.height = Math.sqrt(area);
+            }
+        }
+
+        let square1 = new Square(5);
+        console.log("Area = " + square1.area);
+
+        //square1.height = 4;
+        //console.log("Area = " + square1.area);
+
+        console.log("Area = " + square1.width);
+        square1.area = 64;
+        console.log("Area = " + square1.width);
+*/
+
+
+    </script>
+</body>
+
+</html>
