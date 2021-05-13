@@ -1,0 +1,72 @@
+//1. Start MongoDB instance locally by issuing the following command inside the bin folder inside MongoDB installation directory.
+ cd C:\Program Files\MongoDB\Server\4.4\bin
+
+ mongod --dbpath C:\data\db
+
+//2. Check MongoDB is working by connecting to the local instance using an IDE. Default port for MongoDB is 27017.
+ use sliit
+ show dbs
+
+
+//3. Add the following document to the database sliit;
+ db.students.insert({"name": "John",
+ "dateOfBirth": "1990-01-01T00:00:00Z",
+ "subjects": ["Application frameworks", "Computer architecture"]
+ })
+
+
+//4. Find the document by ‘name’.
+ db.students.find()
+ db.students.find({"name": "John"})
+
+
+//5. Find the document by ‘_id’.
+ db.students.find({"_id": ObjectId("60870168d2300d9bed3e156c")})
+
+
+//6. Add ‘Distributed Computing’ to the subjects list.
+ db.students.updateOne(
+   { "name": "John" },
+   {
+     $set: { "subjects": ["Application frameworks", "Computer architecture", "Distributed Computing"] },
+     $currentDate: { lastModified: true }
+   }
+ )
+
+
+//7. Add the following 2 document to the same collection.
+ db.students.insert({"name": "Smith",
+ "dateOfBirth": "1990-01-15T00:00:00Z",
+ "subjects": ["Application frameworks", "Computer architecture"],
+ "isActive": true
+ })
+
+ db.students.insert({"name": "Jane",
+ "dateOfBirth": "1990-02-15T00:00:00Z",
+ "subjects": ["Application frameworks", "Computer architecture"],
+ "isActive": false
+ })
+
+
+//7. Find the document with the name ‘Smith’ and isActive flag is true and add Distributed computing to subjects.
+ db.students.updateOne(
+   { "name": "Smith", "isActive": true },
+   {
+     $set: { "subjects": ["Application frameworks", "Computer architecture", "Distributed Computing"] },
+     $currentDate: { lastModified: true }
+   }
+ )
+
+
+//8. Update the first document ‘isActive’ to false.
+ db.students.updateOne(
+   { "name": "John" },
+   {
+     $set: { "isActive": false },
+     $currentDate: { lastModified: true }
+   }
+ )
+
+
+//9. Remove the first document created.
+ db.students.deleteMany({ "name": "John"})
